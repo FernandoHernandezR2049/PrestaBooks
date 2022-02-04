@@ -57,3 +57,4 @@ build/
 
 ### Config file ###
 src/main/resources/application.properties
+*.properties
