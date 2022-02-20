@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service @Slf4j @RequiredArgsConstructor
 public class BookServiceImpl implements  BookService{
@@ -26,6 +27,22 @@ public class BookServiceImpl implements  BookService{
     @Override
     public List<Book> getBooks() {
         return bookRepo.findAll();
+    }
+
+    @Override
+    public Book updateBook(Book book, Long id) {
+        Book bookDB = bookRepo.findById(id).get();
+        if (Objects.nonNull(book.getTitle()) && !"".equalsIgnoreCase(book.getTitle())){
+            bookDB.setTitle(book.getTitle());
+        }
+        if (Objects.nonNull(book.getAuthor()) && !"".equalsIgnoreCase(book.getAuthor())){
+            bookDB.setAuthor(book.getAuthor());
+        }
+        if (Objects.nonNull(book.getIsbn()) && !"".equalsIgnoreCase(book.getIsbn())){
+            bookDB.setIsbn(book.getIsbn());
+        }
+
+        return bookRepo.save(bookDB);
     }
 
 }
