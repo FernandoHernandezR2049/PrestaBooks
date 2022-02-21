@@ -50,4 +50,11 @@ public class BookServiceImpl implements  BookService{
         bookRepo.deleteById(id);
     }
 
+    @Override
+    public Book lentBook(Long id) {
+        Book bookDB = bookRepo.findById(id).get();
+        bookDB.setState(1);
+        return bookRepo.save(bookDB);
+    }
+
 }
