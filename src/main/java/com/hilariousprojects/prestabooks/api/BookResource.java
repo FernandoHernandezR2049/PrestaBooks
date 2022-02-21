@@ -26,7 +26,12 @@ public class BookResource {
         return ResponseEntity.created(uri).body(bookService.saveBook(book));
     }
     @PutMapping("/book/{id}")
-    public ResponseEntity<Book>updateBook(@RequestBody Book book,@PathVariable Long id){
+    public ResponseEntity<Book>updateBook(@RequestBody Book book,@PathVariable("id") Long id){
         return ResponseEntity.ok().body(bookService.updateBook(book,id));
+    }
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable("id") Long id){
+        bookService.deleteBook(id);
+        return ResponseEntity.ok().body("Book deleted successfully");
     }
 }
