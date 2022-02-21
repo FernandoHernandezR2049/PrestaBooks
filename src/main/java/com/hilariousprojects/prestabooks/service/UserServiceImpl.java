@@ -79,7 +79,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userRepo.findByUsername(username);
         Book book = bookRepo.findById(bookId).get();
         user.getBorrowedBooks().add(book);
+    }
 
+    @Override
+    public void returnBook(String username, Long bookId) {
+        log.info("User {} returning a borrowed book", username);
+        User user = userRepo.findByUsername(username);
+        Book book = bookRepo.findById(bookId).get();
+        user.getBorrowedBooks().remove(book);
     }
 
     @Override
