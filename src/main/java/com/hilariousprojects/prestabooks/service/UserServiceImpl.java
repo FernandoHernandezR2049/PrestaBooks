@@ -1,7 +1,9 @@
 package com.hilariousprojects.prestabooks.service;
 
+import com.hilariousprojects.prestabooks.domain.Book;
 import com.hilariousprojects.prestabooks.domain.Role;
 import com.hilariousprojects.prestabooks.domain.User;
+import com.hilariousprojects.prestabooks.repo.BookRepo;
 import com.hilariousprojects.prestabooks.repo.RoleRepo;
 import com.hilariousprojects.prestabooks.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final BookRepo bookRepo;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -68,6 +71,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = userRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().remove(role);
+    }
+
+    @Override
+    public void lendBook(String username, Long bookId) {
+        log.info("Lending book to user {}", username);
+        User user = userRepo.findByUsername(username);
+        Book book = bookRepo.findById(bookId).get();
+        user.getBorrowedBooks().add(book);
+
     }
 
     @Override
