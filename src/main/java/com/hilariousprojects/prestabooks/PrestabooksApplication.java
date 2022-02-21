@@ -34,10 +34,10 @@ public class PrestabooksApplication {
 			userService.saveRole(new Role(null, "ROLE_ADMIN"));
 			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-			userService.saveUser(new User(null,"Dwight S","DelPuebloLibrary","123", new ArrayList<>()));
-			userService.saveUser(new User(null,"Jim H","NewWorldLibrary","123", new ArrayList<>()));
-			userService.saveUser(new User(null,"Mike Scott","LibAdmin","123", new ArrayList<>()));
-			userService.saveUser(new User(null,"Andy B","LibUser1","123", new ArrayList<>()));
+			userService.saveUser(new User(null,"Dwight S","DelPuebloLibrary","123", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null,"Jim H","NewWorldLibrary","123", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null,"Mike Scott","LibAdmin","123", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null,"Andy B","LibUser1","123", new ArrayList<>(), new ArrayList<>()));
 
 
 			bookService.saveBook(new Book(null, "Clean Code", "Robert C. Martin", "234h235",1));
