@@ -2,6 +2,8 @@ package com.hilariousprojects.prestabooks.api;
 
 import com.hilariousprojects.prestabooks.domain.Book;
 import com.hilariousprojects.prestabooks.service.BookService;
+import com.hilariousprojects.prestabooks.service.UserService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookResource {
     private final BookService bookService;
+    private final UserService userService;
 
     @GetMapping("/book")
     public ResponseEntity<List<Book>>getBooks(){
@@ -34,4 +37,15 @@ public class BookResource {
         bookService.deleteBook(id);
         return ResponseEntity.ok().body("Book deleted successfully");
     }
+    @PostMapping("/book/lend")
+    public ResponseEntity<?> lendBook(@RequestBody BookToUserForm form){
+        userService.lendBook(form.getUsername(),form.getBookId());
+        bookService.lentBook(form.getBookId());
+        return ResponseEntity.ok().build();
+    }
+}
+@Data
+class BookToUserForm{
+    private String username;
+    private Long bookId;
 }
