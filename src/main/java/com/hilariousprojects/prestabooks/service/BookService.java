@@ -9,5 +9,6 @@ public interface BookService {
     Book getBook(String bookTitle);
     List<Book> getBooks();
     Book updateBook(Book book, Long id);
+    void deleteBook(Long id);
 
 }
