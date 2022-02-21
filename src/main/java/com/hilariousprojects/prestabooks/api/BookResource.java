@@ -43,6 +43,12 @@ public class BookResource {
         bookService.lentBook(form.getBookId());
         return ResponseEntity.ok().build();
     }
+    @DeleteMapping("/book/return")
+    public ResponseEntity<?> returnBook(@RequestBody BookToUserForm form){
+        userService.returnBook(form.getUsername(),form.getBookId());
+        bookService.returnBook(form.getBookId());
+        return ResponseEntity.ok().build();
+    }
 }
 @Data
 class BookToUserForm{
