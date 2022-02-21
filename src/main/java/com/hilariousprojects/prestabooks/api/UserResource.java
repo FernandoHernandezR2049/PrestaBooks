@@ -37,6 +37,11 @@ public class UserResource {
         userService.addRoleToUser(form.getUsername(),form.getRoleName());
         return ResponseEntity.ok().build();
     }
+    @DeleteMapping("/role/removefromuser")
+    public ResponseEntity<?>removeRoleFromUser(@RequestBody RoleToUserForm form){
+        userService.removeRoleFromUser(form.getUsername(),form.getRoleName());
+        return  ResponseEntity.ok().build();
+    }
 
 }
 @Data
