@@ -63,6 +63,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void removeRoleFromUser(String username, String roleName) {
+        log.info("Removing role {} from {} user", roleName, username);
+        User user = userRepo.findByUsername(username);
+        Role role = roleRepo.findByName(roleName);
+        user.getRoles().remove(role);
+    }
+
+    @Override
     public User getUser(String username) {
         log.info("Fetching user {}",username);
         return userRepo.findByUsername(username);
